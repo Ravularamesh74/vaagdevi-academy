@@ -138,11 +138,10 @@ VITE_WHATSAPP=919640958518
 > Add screenshots here for better presentation
 
 ```
-/screenshots/hero.png
-/screenshots/features.png
-/screenshots/contact.png
+![alt text](image.png)
+![alt text](image-1.png)
+![alt text](image-2.png)
 ```
-
 ---
 
 ## 🧠 Design Philosophy
