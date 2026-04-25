@@ -6,6 +6,13 @@ import g2 from "@/assets/gallery-2.jpg";
 import g3 from "@/assets/gallery-3.jpg";
 import g4 from "@/assets/gallery-4.jpg";
 import g5 from "@/assets/gallery-5.jpg";
+
+import studyHall from "@/assets/study-hall.jpg";
+import studyHall2 from "@/assets/study-hall-2.jpg";
+import studyHall3 from "@/assets/study-hall-3.jpg";
+import studyHall4 from "@/assets/study-hall-4.jpg";
+import student from "@/assets/students.jpg"
+
 import students from "@/assets/students-hero.png";
 
 type Item = {
@@ -22,8 +29,13 @@ const items: Item[] = [
   { src: pamphlet, title: "Official Pamphlet", caption: "Our admissions brochure — everything in one page.", tag: "Brochure", span: "row-span-2" },
   { src: g3, title: "Top Scorers", caption: "Celebrating board exam achievers.", tag: "Achievers", span: "" },
   { src: g4, title: "1-on-1 Mentoring", caption: "Personal attention from senior faculty.", tag: "Mentoring", span: "sm:col-span-2" },
-  { src: students, title: "Our Students", caption: "Confident learners ready for tomorrow.", tag: "Students", span: "" },
+
   { src: g5, title: "Daily Practice", caption: "Worksheets, drills and weekly tests.", tag: "Practice", span: "" },
+  { src: studyHall, title: "Study Hall", caption: "Dedicated space for focused learning.", tag: "Study Hall", span: "" },
+  { src: studyHall2, title: "Study Hall 2", caption: "Another view of our study hall.", tag: "Study Hall", span: "" },
+  { src: studyHall3, title: "Study Hall 3", caption: "More students in the study hall.", tag: "Study Hall", span: "" },
+  { src: studyHall4, title: "Study Hall 4", caption: "Another angle of our study hall.", tag: "Study Hall", span: "" },
+  { src: student, title: "Our Students", caption: "Confident learners ready for tomorrow", tag: "Students", span: "" },
 ];
 
 const Gallery = () => {

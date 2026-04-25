@@ -8,6 +8,7 @@ import Gallery from "@/components/Gallery";
 import Pamphlet from "@/components/Pamphlet";
 import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
+import Stats from "@/components/Stats";
 
 const Index = () => {
   return (
@@ -15,9 +16,8 @@ const Index = () => {
       <Header />
       <main>
         <Hero />
-        <section id="about">
-          <Features />
-        </section>
+        <Stats />
+        <Features />
         <Curriculum />
         <Faculty />
         <Testimonials />

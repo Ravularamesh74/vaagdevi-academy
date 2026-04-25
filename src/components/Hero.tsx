@@ -1,109 +1,178 @@
 import { ArrowRight, Sparkles, Star } from "lucide-react";
+import { useEffect, useRef, useState } from "react";
 import students from "@/assets/students-hero.png";
 import pattern from "@/assets/pattern-bg.jpg";
 
+/* ================= COUNTER ================= */
+const Counter = ({ target, suffix = "" }: any) => {
+  const [count, setCount] = useState(0);
+  const ref = useRef(false);
+
+  useEffect(() => {
+    if (ref.current) return;
+    ref.current = true;
+
+    let start = 0;
+    const duration = 1500;
+    const increment = target / (duration / 16);
+
+    const update = () => {
+      start += increment;
+      if (start < target) {
+        setCount(Math.floor(start));
+        requestAnimationFrame(update);
+      } else {
+        setCount(target);
+      }
+    };
+
+    requestAnimationFrame(update);
+  }, [target]);
+
+  return (
+    <span>
+      {count}
+      {suffix}
+    </span>
+  );
+};
+
+/* ================= DATA ================= */
 const stats = [
-  { value: "15+", label: "Years Experience" },
-  { value: "500+", label: "Students Mentored" },
-  { value: "95%", label: "Success Rate" },
-  { value: "4", label: "Classes 7–10" },
+  { value: 15, label: "Years Experience", suffix: "+" },
+  { value: 500, label: "Students Mentored", suffix: "+" },
+  { value: 95, label: "Success Rate", suffix: "%" },
+  { value: 4, label: "Classes 7–10", suffix: "" },
 ];
 
+/* ================= HERO ================= */
 const Hero = () => {
   return (
     <section id="home" className="relative isolate overflow-hidden pt-28 pb-20 lg:pt-36">
-      {/* Background */}
+
+      {/* BACKGROUND */}
       <div className="absolute inset-0 -z-10 bg-gradient-hero" />
       <img
         src={pattern}
         alt=""
-        aria-hidden
-        className="absolute inset-0 -z-10 h-full w-full object-cover opacity-30 mix-blend-screen"
+        className="absolute inset-0 -z-10 h-full w-full object-cover opacity-30"
       />
-      <div className="absolute -left-32 top-20 -z-10 h-96 w-96 rounded-full bg-accent/20 blur-3xl" />
-      <div className="absolute -right-32 bottom-0 -z-10 h-96 w-96 rounded-full bg-primary-foreground/10 blur-3xl" />
 
-      <div className="container relative mx-auto grid items-center gap-12 px-4 lg:grid-cols-2">
-        {/* Copy */}
-        <div className="text-primary-foreground animate-fade-up">
-          <div className="mb-6 inline-flex items-center gap-2 rounded-full glass px-4 py-2 text-xs font-semibold uppercase tracking-widest text-accent-glow">
-            <Sparkles className="h-3.5 w-3.5" />
-            Admissions Open · Limited Seats
+      <div className="container mx-auto grid items-center gap-12 px-4 lg:grid-cols-2">
+
+        {/* LEFT */}
+        <div className="text-white">
+
+          {/* BADGE */}
+          <div className="inline-flex items-center gap-2 rounded-full bg-white/10 px-4 py-2 text-xs font-semibold uppercase tracking-widest text-yellow-400">
+            <Sparkles size={14} />
+            Admissions Open
           </div>
 
-          <h1 className="font-display text-5xl font-extrabold leading-[1.05] sm:text-6xl lg:text-7xl">
-            Strong <span className="text-gradient-gold">Foundation</span>,
-            <br />
-            Brighter <span className="text-gradient-gold">Future</span>.
-          </h1>
-
-          <p className="mt-6 max-w-xl text-lg text-primary-foreground/80">
-            Vaagdevi Tuitions mentors students from <strong className="text-accent-glow">7th to 10th Class</strong> across SSC, CBSE & ICSE — with personal attention,
-            daily practice, and 15+ years of teaching expertise. Learn Today… Lead Tomorrow.
+          {/* URGENCY */}
+          <p className="mt-3 text-green-400 font-semibold text-sm">
+            🔥 Limited seats available
           </p>
 
-          <div className="mt-9 flex flex-wrap gap-4">
+          {/* HEADING */}
+          <h1 className="mt-5 text-5xl sm:text-6xl font-extrabold leading-tight">
+            Strong <span className="text-yellow-400">Foundation</span>, <br />
+            Brighter <span className="text-yellow-400">Future</span>
+          </h1>
+
+          {/* DESC */}
+          <p className="mt-6 max-w-xl text-gray-300 text-lg">
+            Vaagdevi Tuitions mentors students from <b>7th–10th</b> across SSC, CBSE & ICSE with
+            personal attention, daily practice, and 15+ years of teaching excellence.
+          </p>
+
+          {/* TRUST */}
+          <p className="mt-2 text-xs text-gray-400">
+            ✔ Trusted by 1000+ parents in Hyderabad
+          </p>
+
+          {/* CTA */}
+          <div className="mt-8 flex flex-wrap gap-4">
+
+            {/* MAIN CTA */}
             <a
               href="#contact"
-              className="shine group inline-flex items-center gap-2 rounded-full bg-gradient-gold px-7 py-4 text-base font-bold text-accent-foreground shadow-gold transition-bounce hover:scale-105"
+              className="group relative overflow-hidden rounded-full bg-yellow-400 px-7 py-4 font-bold text-black shadow-lg transition hover:scale-105"
             >
               Enroll Now
-              <ArrowRight className="h-5 w-5 transition-smooth group-hover:translate-x-1" />
+              <ArrowRight className="inline ml-2 group-hover:translate-x-1 transition" />
+              <span className="absolute inset-0 bg-white/10 opacity-0 group-hover:opacity-100 transition" />
             </a>
+
+            {/* SECONDARY */}
             <a
               href="#curriculum"
-              className="inline-flex items-center gap-2 rounded-full border border-primary-foreground/30 glass px-7 py-4 text-base font-semibold text-primary-foreground transition-smooth hover:border-accent hover:text-accent-glow"
+              className="rounded-full border border-white/20 px-7 py-4 font-semibold hover:border-yellow-400 hover:text-yellow-400 transition"
             >
               Explore Curriculum
             </a>
           </div>
 
-          {/* Stats */}
-          <div className="mt-12 grid grid-cols-2 gap-4 sm:grid-cols-4">
+          {/* WHATSAPP + CALL */}
+          <div className="mt-4 flex gap-3 flex-wrap">
+            <a
+              href="https://wa.me/919640958518?text=Hi, I want to enquire about admissions"
+              target="_blank"
+              className="bg-green-500 text-black px-5 py-3 rounded-full font-semibold hover:scale-105 transition"
+            >
+              💬 WhatsApp
+            </a>
+
+            <a
+              href="tel:9640958518"
+              className="bg-white/10 px-5 py-3 rounded-full font-semibold hover:bg-yellow-400 hover:text-black transition"
+            >
+              📞 Call Now
+            </a>
+          </div>
+
+          {/* STATS */}
+          <div className="mt-12 grid grid-cols-2 sm:grid-cols-4 gap-4">
             {stats.map((s, i) => (
               <div
-                key={s.label}
-                className="rounded-2xl glass p-4 text-center animate-scale-in"
-                style={{ animationDelay: `${0.2 + i * 0.1}s` }}
+                key={i}
+                className="bg-white/5 rounded-xl p-4 text-center backdrop-blur"
               >
-                <p className="font-display text-3xl font-bold text-gradient-gold">{s.value}</p>
-                <p className="mt-1 text-xs font-medium uppercase tracking-wider text-primary-foreground/70">{s.label}</p>
+                <p className="text-2xl font-bold text-yellow-400">
+                  <Counter target={s.value} suffix={s.suffix} />
+                </p>
+                <p className="text-xs text-gray-400 mt-1">{s.label}</p>
               </div>
             ))}
           </div>
         </div>
 
-        {/* Image */}
-        <div className="relative mx-auto w-full max-w-lg animate-fade-up" style={{ animationDelay: "0.2s" }}>
-          {/* Decorative ring */}
-          <div className="absolute inset-0 -z-10 rounded-full bg-gradient-gold opacity-25 blur-3xl animate-glow-pulse" />
-          <div className="absolute -inset-6 -z-10 rounded-[3rem] border-2 border-accent/30 animate-spin-slow" style={{ borderStyle: "dashed" }} />
+        {/* RIGHT IMAGE */}
+        <div className="relative">
 
           <img
             src={students}
-            alt="Confident Vaagdevi Tuitions students with books"
-            width={1024}
-            height={1024}
-            className="relative animate-float drop-shadow-2xl"
+            className="relative drop-shadow-2xl animate-float"
           />
 
-          {/* Floating badges */}
-          <div className="absolute -left-4 top-10 rounded-2xl glass-light p-4 shadow-elegant animate-float-slow">
-            <div className="flex items-center gap-3">
-              <div className="flex h-10 w-10 items-center justify-center rounded-full bg-gradient-gold text-accent-foreground">
-                <Star className="h-5 w-5 fill-current" />
-              </div>
-              <div>
-                <p className="text-xs text-muted-foreground">Rated</p>
-                <p className="text-sm font-bold text-primary">4.9 / 5</p>
-              </div>
-            </div>
+          {/* BADGE 1 */}
+          <div className="absolute top-10 left-0 bg-white/10 backdrop-blur p-4 rounded-xl">
+            <Star className="text-yellow-400" />
+            <p className="text-sm font-bold">4.9 Rating</p>
           </div>
 
-          <div className="absolute -right-2 bottom-12 rounded-2xl glass-light p-4 shadow-elegant animate-float-slow" style={{ animationDelay: "1.2s" }}>
-            <p className="text-[10px] font-semibold uppercase tracking-widest text-accent">Curriculum</p>
-            <p className="mt-1 font-display text-base font-bold text-primary">SSC · CBSE · ICSE</p>
+          {/* BADGE 2 */}
+          <div className="absolute bottom-10 right-0 bg-white/10 backdrop-blur p-4 rounded-xl">
+            <p className="text-xs">Boards</p>
+            <p className="font-bold text-yellow-400">SSC · CBSE · ICSE</p>
           </div>
+
+          {/* NEW BADGE */}
+          <div className="absolute top-1/2 -right-6 bg-white/10 backdrop-blur p-3 rounded-xl">
+            <p className="text-xs">Results</p>
+            <p className="font-bold text-yellow-400">Top Rankers</p>
+          </div>
+
         </div>
       </div>
     </section>

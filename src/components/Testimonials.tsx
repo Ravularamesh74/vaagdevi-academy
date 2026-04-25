@@ -1,54 +1,129 @@
-import { Quote } from "lucide-react";
+import { Quote, Star, Play } from "lucide-react";
+import { useEffect, useState } from "react";
 
-const quotes = [
+const testimonials = [
   {
-    text: "My son's confidence in Maths transformed in just 3 months. The personal attention is unmatched.",
+    text: "My son's confidence in Maths improved drastically in just 3 months.",
     name: "Anitha R.",
     role: "Parent · Class 9",
+    result: "Marks improved from 55% → 88%",
+    img: "/avatar1.jpg",
   },
   {
-    text: "I went from struggling in Science to scoring 92% in my SSC boards. Praveen sir made everything click.",
+    text: "I scored 92% in SSC boards thanks to the structured teaching.",
     name: "Rohit K.",
     role: "Student · Class 10",
+    result: "Final Score: 92%",
+    img: "/avatar2.jpg",
   },
   {
-    text: "Manjula ma'am turned English from my weakest subject into my favourite. Forever grateful.",
+    text: "English became my strongest subject. Amazing mentoring.",
     name: "Sneha P.",
     role: "Student · Class 8",
+    result: "Top in class",
+    img: "/avatar3.jpg",
   },
 ];
 
 const Testimonials = () => {
-  return (
-    <section className="relative overflow-hidden bg-gradient-primary py-24 text-primary-foreground">
-      <div className="absolute -right-20 top-10 h-72 w-72 rounded-full bg-accent/20 blur-3xl" />
-      <div className="absolute -left-20 bottom-10 h-72 w-72 rounded-full bg-accent/10 blur-3xl" />
+  const [index, setIndex] = useState(0);
 
-      <div className="container relative mx-auto px-4">
-        <div className="mx-auto max-w-2xl text-center">
-          <p className="text-xs font-bold uppercase tracking-[0.3em] text-accent-glow">Voices of Parents & Students</p>
-          <h2 className="mt-3 font-display text-4xl font-bold sm:text-5xl">
-            Stories of <span className="text-gradient-gold">Real Growth</span>
+  /* AUTO SLIDE */
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setIndex((i) => (i + 1) % testimonials.length);
+    }, 4000);
+    return () => clearInterval(interval);
+  }, []);
+
+  return (
+    <section className="relative py-28 bg-[#0b0f19] text-white overflow-hidden">
+
+      {/* BACKGROUND GLOW */}
+      <div className="absolute top-0 left-0 w-80 h-80 bg-yellow-400/10 blur-3xl rounded-full" />
+      <div className="absolute bottom-0 right-0 w-80 h-80 bg-purple-500/10 blur-3xl rounded-full" />
+
+      <div className="container mx-auto px-4">
+
+        {/* HEADER */}
+        <div className="text-center max-w-2xl mx-auto">
+          <p className="text-xs uppercase tracking-widest text-yellow-400 font-bold">
+            Trusted by Parents
+          </p>
+
+          <h2 className="mt-3 text-4xl sm:text-5xl font-bold">
+            Real <span className="text-yellow-400">Results</span>
           </h2>
+
+          <p className="mt-4 text-gray-400">
+            Proven success stories from our students
+          </p>
         </div>
 
-        <div className="mt-16 grid gap-6 md:grid-cols-3">
-          {quotes.map((q, i) => (
-            <figure
-              key={q.name}
-              className="relative rounded-3xl glass p-7 transition-smooth hover:-translate-y-2"
-              style={{ animationDelay: `${i * 0.1}s` }}
-            >
-              <Quote className="h-10 w-10 text-accent" />
-              <blockquote className="mt-4 text-base leading-relaxed text-primary-foreground/90">
-                "{q.text}"
-              </blockquote>
-              <figcaption className="mt-6 border-t border-white/10 pt-4">
-                <p className="font-display text-lg font-bold text-accent-glow">{q.name}</p>
-                <p className="text-xs text-primary-foreground/70">{q.role}</p>
-              </figcaption>
-            </figure>
-          ))}
+        {/* MAIN CARD */}
+        <div className="mt-16 max-w-4xl mx-auto relative">
+
+          <div className="rounded-3xl bg-[#121826] p-10 text-center shadow-2xl transition">
+
+            {/* QUOTE ICON */}
+            <Quote className="mx-auto text-yellow-400" size={36} />
+
+            {/* TEXT */}
+            <p className="mt-6 text-xl text-gray-300 leading-relaxed">
+              "{testimonials[index].text}"
+            </p>
+
+            {/* RESULT BADGE */}
+            <div className="mt-4 inline-block bg-green-500/10 text-green-400 px-4 py-1 rounded-full text-xs font-semibold">
+              {testimonials[index].result}
+            </div>
+
+            {/* STARS */}
+            <div className="flex justify-center gap-1 mt-4">
+              {[...Array(5)].map((_, i) => (
+                <Star key={i} size={16} className="text-yellow-400 fill-yellow-400" />
+              ))}
+            </div>
+
+            {/* PROFILE */}
+            <div className="mt-6 flex flex-col items-center">
+              <img
+                src={testimonials[index].img}
+                className="w-14 h-14 rounded-full object-cover border-2 border-yellow-400"
+              />
+              <p className="mt-2 font-bold">{testimonials[index].name}</p>
+              <p className="text-xs text-gray-400">{testimonials[index].role}</p>
+            </div>
+
+            {/* VIDEO CTA */}
+            <button className="mt-6 flex items-center gap-2 mx-auto text-sm text-yellow-400 hover:underline">
+              <Play size={16} />
+              Watch Video Testimonial
+            </button>
+          </div>
+
+          {/* DOTS */}
+          <div className="flex justify-center gap-2 mt-6">
+            {testimonials.map((_, i) => (
+              <button
+                key={i}
+                onClick={() => setIndex(i)}
+                className={`w-3 h-3 rounded-full ${
+                  index === i ? "bg-yellow-400" : "bg-white/20"
+                }`}
+              />
+            ))}
+          </div>
+        </div>
+
+        {/* CTA */}
+        <div className="text-center mt-14">
+          <a
+            href="#contact"
+            className="bg-yellow-400 text-black px-8 py-3 rounded-full font-bold hover:scale-105 transition"
+          >
+            Enroll Your Child Today
+          </a>
         </div>
       </div>
     </section>
