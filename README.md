@@ -127,8 +127,8 @@ npm run build
 Create `.env` file:
 
 ```
-VITE_PHONE=9640958518
-VITE_WHATSAPP=919640958518
+VITE_PHONE=96
+VITE_WHATSAPP=91964
 ```
 
 ---
